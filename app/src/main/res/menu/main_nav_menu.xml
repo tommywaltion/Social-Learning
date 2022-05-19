@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/home_btn"
+        android:title="Home"
+        android:icon="@drawable/ic_baseline_home"
+        />
+    <item android:id="@+id/flag_btn"
+        android:title="Flag"
+        android:icon="@drawable/ic_baseline_outlined_flag"
+        />
+    <item android:id="@+id/group_btn"
+        android:title="Group"
+        android:icon="@drawable/ic_baseline_group"
+        />
+
+</menu>
