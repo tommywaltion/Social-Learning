@@ -31,7 +31,17 @@ public class HomeFragment extends Fragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        recyclerView.setAdapter(new AdapterPost(view.getContext(),postModelArrayList));
+        recyclerView.setAdapter(new AdapterPost(view.getContext(), postModelArrayList, new AdapterPost.AdapterPostListener() {
+            @Override
+            public void onLikeClicked(View v, int position) {
+                Toast.makeText(getContext(), "Clicked liked on post " + position + " With " + postModelArrayList.get(position).getLikes() + " likes.", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onShareClicked(View v, int position) {
+                Toast.makeText(getContext(), "Clicked Share on post " + position + " With " + postModelArrayList.get(position).getLikes() + " likes.", Toast.LENGTH_SHORT).show();
+            }
+        }));
 
         return view;
     }
