@@ -17,9 +17,9 @@ import java.util.ArrayList;
 
 public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyViewHolder> {
 
-    private final Context context;
-    private final ArrayList<PostModel> postModelArrayList;
-    private final RequestManager glide;
+    Context context;
+    ArrayList<PostModel> postModelArrayList;
+    RequestManager glide;
     public static AdapterPostListener onClickListener;
 
     public interface AdapterPostListener {
@@ -27,7 +27,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyViewHolder> 
         void onShareClicked(View v, int position);
     }
 
-    public AdapterPost(Context context, ArrayList<PostModel> postModelArrayList, AdapterPostListener listener) {
+    public AdapterPost(Context context,ArrayList<PostModel> postModelArrayList, AdapterPostListener listener) {
         this.context = context;
         this.postModelArrayList = postModelArrayList;
         this.onClickListener = listener;
@@ -71,7 +71,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyViewHolder> 
         TextView post_creator_name, post_create_time, post_like, post_title,post_like_btn,post_share_btn;
         ImageView post_creator_profile, post_image;
 
-        public MyViewHolder(final View itemView) {
+        public MyViewHolder(@NonNull View itemView) {
 
             super(itemView);
 
@@ -80,7 +80,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyViewHolder> 
 
             post_creator_name = itemView.findViewById(R.id.post_creator_name);
             post_create_time = itemView.findViewById(R.id.post_create_time);
-            post_like = itemView.findViewById(R.id.post_like_count);
+            post_like = itemView.findViewById(R.id.post_like);
             post_title = itemView.findViewById(R.id.post_title);
 
             post_like_btn = itemView.findViewById(R.id.post_like_btn);
