@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public void onStart() {
         super.onStart();
@@ -125,7 +125,8 @@ public class LoginActivity extends AppCompatActivity {
                         .addOnCompleteListener(this, task -> {
                             if (task.isSuccessful()) {
                                 startActivity(new Intent(getApplicationContext(),DashboardActivity.class));
-                                Log.d("LoginActivity" ,"onSuccess: user Profile is logged for " + auth.getCurrentUser().getUid());
+                                FirebaseUser currentUser = auth.getCurrentUser();
+                                if (currentUser != null) Log.d("LoginActivity" ,"onSuccess: user Profile is logged for " + currentUser.getUid());
                                 finish();
                             }
                         }).addOnFailureListener(e -> {
@@ -138,24 +139,36 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot doc : task.getResult()) {
                             if (doc.exists()) {
-                                if (doc.getString("username").equals(email.getText().toString())) {
-                                    auth.signInWithEmailAndPassword(doc.getString("email"),password.getText().toString().trim())
-                                            .addOnCompleteListener(this, task1 -> {
-                                                if (task1.isSuccessful()) {
-                                                    startActivity(new Intent(getApplicationContext(),DashboardActivity.class));
-                                                    Log.d("LoginActivity" ,"onSuccess: user Profile is logged for " + auth.getCurrentUser().getUid());
-                                                    finish();
-                                                }
-                                            }).addOnFailureListener(e -> {
-                                                Toast.makeText(LoginActivity.this,"LOGIN FAILED, " + e.getMessage(),Toast.LENGTH_LONG).show();
-                                                Log.d("LoginActivity" ,"onFailure: " + e.getMessage());
-                                            });
-                                    break;
+                                String username = doc.getString("username");
+                                if (username != null) {
+                                    if (username.equals(email.getText().toString())) {
+                                        String Email = doc.getString("email");
+                                        if (Email != null) {
+                                            auth.signInWithEmailAndPassword(Email,password.getText().toString().trim())
+                                                    .addOnCompleteListener(this, task1 -> {
+                                                        if (task1.isSuccessful()) {
+                                                            FirebaseUser currentUser = auth.getCurrentUser();
+                                                            if (currentUser != null) {
+                                                                startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+                                                                Log.d("LoginActivity", "onSuccess: user Profile is logged for " + currentUser.getUid());
+                                                                finish();
+                                                            }
+                                                        }
+                                                    }).addOnFailureListener(e -> {
+                                                        Toast.makeText(LoginActivity.this,"LOGIN FAILED, " + e.getMessage(),Toast.LENGTH_LONG).show();
+                                                        Log.d("LoginActivity" ,"onFailure: " + e.getMessage());
+                                                    });
+                                            break;
+                                        }
+                                    }
                                 }
                             }
                         }
                     } else {
-                        Log.e("LoginActivity",task.getException().getMessage());
+                        Exception e = task.getException();
+                        if (e != null) {
+                            Log.e("LoginActivity",e.getMessage());
+                        }
                     }
                 });
             }

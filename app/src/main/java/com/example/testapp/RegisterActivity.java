@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,8 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -27,13 +24,12 @@ import java.util.Objects;
 public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String UserId;
 
     public void onStart() {
 
         super.onStart();
-        FirebaseUser currentUser = auth.getCurrentUser();
 
     }
 
@@ -86,9 +82,9 @@ public class RegisterActivity extends AppCompatActivity {
             if (imm.isAcceptingText()) {
                 imm.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(),0);
             }
-            Boolean empty = false;
+            boolean empty = false;
             if (username.getText().toString().isEmpty()) {
-                username.setError("Username is requred.");
+                username.setError("Username is required.");
                 empty = true;
             }if (email.getText().toString().isEmpty()) {
                 email.setError("Email is required.");
@@ -115,7 +111,7 @@ public class RegisterActivity extends AppCompatActivity {
             auth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                     .addOnCompleteListener(this, task -> {
                         if (task.isSuccessful()) {
-                            UserId = auth.getCurrentUser().getUid();
+                            UserId = Objects.requireNonNull(auth.getCurrentUser()).getUid();
                             Map<String, Object> user = new HashMap<>();
                             user.put("username",username.getText().toString());
                             user.put("NIS",nis.getText().toString());
