@@ -12,6 +12,7 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -35,6 +36,11 @@ public class LoginActivity extends AppCompatActivity {
         MaterialButton login_btn = findViewById(R.id.sign_in_btn);
         TextView email = findViewById(R.id.email);
         login_btn.setEnabled(email.getText().toString().trim().length() != 0);
+        if (currentUser != null) {
+            //startActivity(new Intent(getApplicationContext(),DashboardActivity.class));
+            Log.d("LoginActivity" ,"onSuccess: user Profile is created for " + currentUser.getUid());
+            //finish();
+        }
     }
 
     @Override
@@ -67,13 +73,13 @@ public class LoginActivity extends AppCompatActivity {
 
         login_btn.setOnClickListener(v -> {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(),0);
+            if (imm.isAcceptingText()) {
+                imm.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(),0);
+            }
             if (TextUtils.isEmpty(email.getText().toString().trim())) {
                 email.setError("Email is required.");
-                Toast.makeText(LoginActivity.this, "PASSWORD MISSING", Toast.LENGTH_LONG).show();
             } else if (TextUtils.isEmpty(password.getText().toString().trim())) {
                 password.setError("Password is required.");
-                Toast.makeText(LoginActivity.this, "PASSWORD MISSING", Toast.LENGTH_LONG).show();
             } else if (email.getText().toString().trim().equals("admin") && password.getText().toString().trim().equals("admin")) {
 
                 dialogBuilder = new AlertDialog.Builder(this);
@@ -98,8 +104,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 submit.setOnClickListener(v1 -> {
                     if (userInput.getText().toString().equals("1234")) {
+                        dialog.dismiss();
                         Intent logged_in = new Intent(getApplicationContext(), DashboardActivity.class);
-                        logged_in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(logged_in);
                         finish();
                     } else {
@@ -114,13 +120,13 @@ public class LoginActivity extends AppCompatActivity {
                 auth.signInWithEmailAndPassword(email.getText().toString().trim(),password.getText().toString().trim())
                         .addOnCompleteListener(this, task -> {
                             if (task.isSuccessful()) {
-                                Intent logged_in = new Intent(getApplicationContext(),DashboardActivity.class);
-                                logged_in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(logged_in);
+                                startActivity(new Intent(getApplicationContext(),DashboardActivity.class));
+                                Log.d("LoginActivity" ,"onSuccess: user Profile is created for " + auth.getCurrentUser().getUid());
                                 finish();
-                            }else {
-                                Toast.makeText(LoginActivity.this,"LOGIN FAILED, " + task.getException().getMessage(),Toast.LENGTH_LONG).show();
                             }
+                        }).addOnFailureListener(e -> {
+                            Toast.makeText(LoginActivity.this,"LOGIN FAILED, " + e.getMessage(),Toast.LENGTH_LONG).show();
+                            Log.d("LoginActivity" ,"onFailure: " + e.getMessage());
                         });
             }
         });
@@ -136,10 +142,9 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         createUser.setOnClickListener(v -> {
-            //Create new user, change into create user layout
-            Toast.makeText(LoginActivity.this,"CREATING NEW USER",Toast.LENGTH_LONG).show();
-            Intent logged_in = new Intent(getApplicationContext(), RegisterActivity.class);
-            startActivity(logged_in);
+            Intent register = new Intent(getApplicationContext(), RegisterActivity.class);
+            startActivity(register);
+            finish();
         });
 
     }

@@ -1,34 +1,47 @@
 package com.example.testapp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private String UserId;
 
     public void onStart() {
 
         super.onStart();
         FirebaseUser currentUser = auth.getCurrentUser();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent login = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(login);
+        finish();
     }
 
     @Override
@@ -39,10 +52,11 @@ public class RegisterActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
-        EditText email,nis,password,confirm_password;
+        EditText username,email,nis,password,confirm_password;
         Button submit;
         TextView alreadyUser;
 
+        username = findViewById(R.id.username_new);
         email = findViewById(R.id.email_new);
         nis = findViewById(R.id.NIS);
         password = findViewById(R.id.password_new);
@@ -69,33 +83,59 @@ public class RegisterActivity extends AppCompatActivity {
         submit.setOnClickListener(v -> {
 
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), 0);
-
-            if (TextUtils.isEmpty(email.getText().toString().trim())) {
+            if (imm.isAcceptingText()) {
+                imm.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(),0);
+            }
+            Boolean empty = false;
+            if (username.getText().toString().isEmpty()) {
+                username.setError("Username is requred.");
+                empty = true;
+            }if (email.getText().toString().isEmpty()) {
                 email.setError("Email is required.");
-                return;
-            }if (TextUtils.isEmpty(nis.getText().toString().trim())) {
+                empty = true;
+            }if (nis.getText().toString().isEmpty()) {
                 nis.setError("NIS is required.");
-                return;
-            }if (TextUtils.isEmpty(password.getText().toString().trim())) {
+                empty = true;
+            }if (password.getText().toString().isEmpty()) {
                 password.setError("password is required.");
-                return;
-            }if (TextUtils.isEmpty(confirm_password.getText().toString().trim())) {
+                empty = true;
+            }if (password.getText().toString().length()<6) {
+                password.setError("password is required 6 minimum character.");
+                empty = true;
+            }if (confirm_password.getText().toString().isEmpty()) {
                 confirm_password.setError("confirm your password.");
-                return;
+                empty = true;
+            }if (!password.getText().toString().equals(confirm_password.getText().toString())) {
+                confirm_password.setError("Password do not match.");
+                empty = true;
             }
 
-            auth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(this, task -> {
-                if (task.isSuccessful()) {
-                    Toast.makeText(RegisterActivity.this,"ACCOUNT CREATED",Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(RegisterActivity.this,"ERROR" + task.getException().getMessage(),Toast.LENGTH_LONG).show();
-                }
+            if (empty) return;
+
+            auth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                    .addOnCompleteListener(this, task -> {
+                        if (task.isSuccessful()) {
+                            UserId = auth.getCurrentUser().getUid();
+                            Map<String, Object> user = new HashMap<>();
+                            user.put("username",username.getText().toString());
+                            user.put("NIS",nis.getText().toString());
+                            user.put("email",email.getText().toString());
+                            db.collection("users").add(user).addOnSuccessListener(command -> Log.d("RegisterActivity" ,"onSuccess: user Profile is created for " + UserId));
+                            startActivity(new Intent(getApplicationContext(),DashboardActivity.class));
+                            finish();
+                        }
+                    }).addOnFailureListener(e -> {
+                        Log.d("RegisterActivity" ,"onFailure: " + e.getMessage());
+                        Toast.makeText(RegisterActivity.this, e.getMessage(),Toast.LENGTH_LONG).show();
             });
         });
 
         alreadyUser = findViewById(R.id.already_user);
-        alreadyUser.setOnClickListener(v -> finish());
+        alreadyUser.setOnClickListener(v -> {
+            Intent login = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(login);
+            finish();
+        });
 
     }
 }

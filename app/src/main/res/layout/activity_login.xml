@@ -101,14 +101,14 @@
         android:text="@string/create_btn"
         android:textColor="@color/black" />
 
-    <ImageView
-        android:id="@+id/post_divide_line"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_below="@id/sign_in_btn"
-        android:layout_marginTop="5dp"
-        android:background="@color/light_gray"
-        android:contentDescription="@string/divider_contentDesc"/>
+    <!--    <ImageView-->
+    <!--        android:id="@+id/post_divide_line"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="2dp"-->
+    <!--        android:layout_below="@id/sign_in_btn"-->
+    <!--        android:layout_marginTop="5dp"-->
+    <!--        android:background="@color/light_gray"-->
+    <!--        android:contentDescription="@string/divider_contentDesc" />-->
 
 
 

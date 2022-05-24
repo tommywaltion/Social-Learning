@@ -12,8 +12,10 @@
     //Register activity
 
     <string name="sign_up">SIGN UP</string>
+    <string name="user_name">NAME</string>
     <string name="user_nis">NIS</string>
     <string name="hint_password_confirmation">CONFIRM PASSWORD</string>
+    <string name="already_btn">Sign In?</string>
 
     //Group Fragment
 

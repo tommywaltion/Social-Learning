@@ -94,7 +94,7 @@
             tools:ignore="UselessParent">
 
             <TextView
-                android:id="@+id/post_like"
+                android:id="@+id/post_like_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -136,6 +136,7 @@
                 tools:ignore="UselessParent">
 
                 <TextView
+                    android:id="@+id/post_like_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -162,6 +163,7 @@
                 tools:ignore="UselessParent">
 
                 <TextView
+                    android:id="@+id/post_share_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
