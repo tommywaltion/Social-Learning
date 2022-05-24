@@ -20,7 +20,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyViewHolder> 
     Context context;
     ArrayList<PostModel> postModelArrayList;
     RequestManager glide;
-    public static AdapterPostListener onClickListener;
+    public static AdapterPostListener clickListner;
 
     public interface AdapterPostListener {
         void onLikeClicked(View v, int position);
@@ -30,7 +30,7 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyViewHolder> 
     public AdapterPost(Context context,ArrayList<PostModel> postModelArrayList, AdapterPostListener listener) {
         this.context = context;
         this.postModelArrayList = postModelArrayList;
-        this.onClickListener = listener;
+        clickListner = listener;
         glide = Glide.with(context);
     }
 
@@ -80,14 +80,14 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.MyViewHolder> 
 
             post_creator_name = itemView.findViewById(R.id.post_creator_name);
             post_create_time = itemView.findViewById(R.id.post_create_time);
-            post_like = itemView.findViewById(R.id.post_like);
+            post_like = itemView.findViewById(R.id.post_like_count);
             post_title = itemView.findViewById(R.id.post_title);
 
             post_like_btn = itemView.findViewById(R.id.post_like_btn);
             post_share_btn = itemView.findViewById(R.id.post_share_btn);
 
-            post_like_btn.setOnClickListener(v -> onClickListener.onLikeClicked(v, getAbsoluteAdapterPosition()));
-            post_share_btn.setOnClickListener(v -> onClickListener.onShareClicked(v, getAbsoluteAdapterPosition()));
+            post_like_btn.setOnClickListener(v -> clickListner.onLikeClicked(v, getAbsoluteAdapterPosition()));
+            post_share_btn.setOnClickListener(v -> clickListner.onShareClicked(v, getAbsoluteAdapterPosition()));
 
         }
     }
