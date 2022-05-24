@@ -60,6 +60,18 @@
         android:textColor="@color/black"
         android:textColorHint="@color/black" />
 
+    <TextView
+        android:id="@+id/forgot_pass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/password"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="@string/forgot_btn"
+        android:textColor="@color/black" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/sign_in_btn"
         android:layout_width="wrap_content"
@@ -75,18 +87,6 @@
         android:text="@string/sign_in"
         android:textColor="#37474F"
         tools:ignore="DuplicateSpeakableTextCheck" />
-
-    <TextView
-        android:id="@+id/forgot_pass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/password"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:text="@string/forgot_btn"
-        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/create_new"

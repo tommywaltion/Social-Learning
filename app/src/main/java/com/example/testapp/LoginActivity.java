@@ -13,6 +13,7 @@ import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -23,12 +24,15 @@ import android.widget.Toast;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public void onStart() {
         super.onStart();
@@ -85,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                 dialogBuilder = new AlertDialog.Builder(this);
                 final View passwordPermissionView = getLayoutInflater().inflate(R.layout.popup_number, null);
 
-                TextView cancel,title;
+                TextView cancel, title;
                 EditText userInput;
                 Button submit;
 
@@ -95,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                 cancel = (TextView) passwordPermissionView.findViewById(R.id.popup_number_cancel_btn);
 
                 title.setText(R.string.Number_code_title);
-                userInput.setFilters(new InputFilter[] { new InputFilter.LengthFilter(4) });
+                userInput.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
 
                 dialogBuilder.setView(passwordPermissionView);
                 dialog = dialogBuilder.create();
@@ -116,18 +120,44 @@ public class LoginActivity extends AppCompatActivity {
 
                 cancel.setOnClickListener(v1 -> dialog.dismiss());
 
-            } else {
+            } else if (isEmailValid(email.getText().toString())) {
                 auth.signInWithEmailAndPassword(email.getText().toString().trim(),password.getText().toString().trim())
                         .addOnCompleteListener(this, task -> {
                             if (task.isSuccessful()) {
                                 startActivity(new Intent(getApplicationContext(),DashboardActivity.class));
-                                Log.d("LoginActivity" ,"onSuccess: user Profile is created for " + auth.getCurrentUser().getUid());
+                                Log.d("LoginActivity" ,"onSuccess: user Profile is logged for " + auth.getCurrentUser().getUid());
                                 finish();
                             }
                         }).addOnFailureListener(e -> {
                             Toast.makeText(LoginActivity.this,"LOGIN FAILED, " + e.getMessage(),Toast.LENGTH_LONG).show();
                             Log.d("LoginActivity" ,"onFailure: " + e.getMessage());
                         });
+            } else {
+                Toast.makeText(LoginActivity.this,"Login with Username detected",Toast.LENGTH_LONG).show();
+                db.collection("users").get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot doc : task.getResult()) {
+                            if (doc.exists()) {
+                                if (doc.getString("username").equals(email.getText().toString())) {
+                                    auth.signInWithEmailAndPassword(doc.getString("email"),password.getText().toString().trim())
+                                            .addOnCompleteListener(this, task1 -> {
+                                                if (task1.isSuccessful()) {
+                                                    startActivity(new Intent(getApplicationContext(),DashboardActivity.class));
+                                                    Log.d("LoginActivity" ,"onSuccess: user Profile is logged for " + auth.getCurrentUser().getUid());
+                                                    finish();
+                                                }
+                                            }).addOnFailureListener(e -> {
+                                                Toast.makeText(LoginActivity.this,"LOGIN FAILED, " + e.getMessage(),Toast.LENGTH_LONG).show();
+                                                Log.d("LoginActivity" ,"onFailure: " + e.getMessage());
+                                            });
+                                    break;
+                                }
+                            }
+                        }
+                    } else {
+                        Log.e("LoginActivity",task.getException().getMessage());
+                    }
+                });
             }
         });
 
@@ -147,5 +177,9 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         });
 
+    }
+
+    private boolean isEmailValid(CharSequence email) {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 }
