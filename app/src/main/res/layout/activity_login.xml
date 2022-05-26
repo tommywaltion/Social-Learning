@@ -101,6 +101,17 @@
         android:text="@string/create_btn"
         android:textColor="@color/black" />
 
+    <ProgressBar
+        android:id="@+id/login_progressbar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="25dp"
+        android:visibility="gone"/>
+
+
     <!--    <ImageView-->
     <!--        android:id="@+id/post_divide_line"-->
     <!--        android:layout_width="match_parent"-->
@@ -109,7 +120,6 @@
     <!--        android:layout_marginTop="5dp"-->
     <!--        android:background="@color/light_gray"-->
     <!--        android:contentDescription="@string/divider_contentDesc" />-->
-
 
 
 </RelativeLayout>

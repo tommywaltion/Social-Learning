@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,6 +59,9 @@ public class LoginActivity extends AppCompatActivity {
         TextView email = findViewById(R.id.email);
         TextView password = findViewById(R.id.password);
         MaterialButton login_btn = findViewById(R.id.sign_in_btn);
+        ProgressBar loading = findViewById(R.id.login_progressbar);
+
+        loading.setVisibility(View.GONE);
 
         email.addTextChangedListener(new TextWatcher() {
             @Override
@@ -81,6 +85,7 @@ public class LoginActivity extends AppCompatActivity {
             if (imm.isAcceptingText()) {
                 imm.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(),0);
             }
+            loading.setVisibility(View.VISIBLE);
             if (TextUtils.isEmpty(email.getText().toString().trim())) {
                 email.setError("Email is required.");
             } else if (TextUtils.isEmpty(password.getText().toString().trim())) {

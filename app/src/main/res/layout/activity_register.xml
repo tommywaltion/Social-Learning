@@ -154,4 +154,14 @@
         android:textColor="#37474F"
         tools:ignore="DuplicateSpeakableTextCheck" />
 
+    <ProgressBar
+        android:id="@+id/register_progressbar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="25dp"
+        android:visibility="gone"/>
+
 </RelativeLayout>

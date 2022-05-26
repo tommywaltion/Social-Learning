@@ -8,9 +8,11 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
         EditText username,email,nis,password,confirm_password;
         Button submit;
         TextView alreadyUser;
+        ProgressBar loading;
 
         username = findViewById(R.id.username_new);
         email = findViewById(R.id.email_new);
@@ -58,6 +61,9 @@ public class RegisterActivity extends AppCompatActivity {
         password = findViewById(R.id.password_new);
         confirm_password = findViewById(R.id.password_confirm);
         submit = findViewById(R.id.sign_up_btn);
+        loading = findViewById(R.id.login_progressbar);
+
+        loading.setVisibility(View.GONE);
 
         email.addTextChangedListener(new TextWatcher() {
             @Override
@@ -77,11 +83,11 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         submit.setOnClickListener(v -> {
-
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             if (imm.isAcceptingText()) {
                 imm.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(),0);
             }
+            loading.setVisibility(View.VISIBLE);
             boolean empty = false;
             if (username.getText().toString().isEmpty()) {
                 username.setError("Username is required.");
