@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final String adminPassword = "1234";
 
     public void onStart() {
         super.onStart();
@@ -107,7 +108,7 @@ public class LoginActivity extends AppCompatActivity {
                 dialog.show();
 
                 submit.setOnClickListener(v1 -> {
-                    if (userInput.getText().toString().equals("1234")) {
+                    if (userInput.getText().toString().equals(adminPassword)) {
                         dialog.dismiss();
                         Intent logged_in = new Intent(getApplicationContext(), DashboardActivity.class);
                         startActivity(logged_in);
@@ -134,7 +135,6 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d("LoginActivity" ,"onFailure: " + e.getMessage());
                         });
             } else {
-                Toast.makeText(LoginActivity.this,"Login with Username detected",Toast.LENGTH_LONG).show();
                 db.collection("users").get().addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot doc : task.getResult()) {
@@ -180,8 +180,41 @@ public class LoginActivity extends AppCompatActivity {
         createUser = findViewById(R.id.create_new);
 
         forgotUser.setOnClickListener(v -> {
-            //User forgot password, change into forgot user layout
-            Toast.makeText(LoginActivity.this,"USER FORGOT PASSWORD",Toast.LENGTH_LONG).show();
+            dialogBuilder = new AlertDialog.Builder(this);
+            final View EmailRequestView = getLayoutInflater().inflate(R.layout.popup_email, null);
+
+            TextView cancel, title;
+            EditText userInput;
+            Button submit;
+
+            title = (TextView) EmailRequestView.findViewById(R.id.popup_email_title);
+            userInput = (EditText) EmailRequestView.findViewById(R.id.popup_email_input);
+            submit = (Button) EmailRequestView.findViewById(R.id.popup_email_submit_btn);
+            cancel = (TextView) EmailRequestView.findViewById(R.id.popup_email_cancel_btn);
+
+            title.setText(R.string.Email_Popup_title);
+
+            dialogBuilder.setView(EmailRequestView);
+            dialog = dialogBuilder.create();
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+
+            submit.setOnClickListener(v1 -> {
+                if (isEmailValid(userInput.getText().toString())) {
+                    auth.sendPasswordResetEmail(userInput.getText().toString())
+                            .addOnSuccessListener(command -> {
+                                Toast.makeText(LoginActivity.this,"Reset Password Email Sent.",Toast.LENGTH_LONG).show();
+                                dialog.dismiss();
+                            })
+                            .addOnFailureListener(e -> Toast.makeText(LoginActivity.this,e.getMessage(),Toast.LENGTH_LONG).show());
+                } else if (userInput.getText().toString().isEmpty()){
+                    userInput.setError("Required field.");
+                } else {
+                    userInput.setError("Required a valid email.");
+                }
+            });
+
+            cancel.setOnClickListener(v1 -> dialog.dismiss());
         });
 
         createUser.setOnClickListener(v -> {

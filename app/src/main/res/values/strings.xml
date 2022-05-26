@@ -4,7 +4,7 @@
     //Login activity
 
     <string name="sign_in">SIGN IN</string>
-    <string name="hint_email">EMAIL</string>
+    <string name="hint_email">EMAIL/USERNAME</string>
     <string name="hint_password">PASSWORD</string>
     <string name="forgot_btn">Forgot Password?</string>
     <string name="create_btn">Sign Up?</string>
@@ -16,6 +16,11 @@
     <string name="user_nis">NIS</string>
     <string name="hint_password_confirmation">CONFIRM PASSWORD</string>
     <string name="already_btn">Sign In?</string>
+    
+    //Popup email forget password
+    
+    <string name="Email_Popup_hint">Email</string>
+    <string name="Email_Popup_title">Enter your email to get your reset password link</string>
 
     //Group Fragment
 
