@@ -2,8 +2,10 @@ package com.example.testapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -42,11 +44,14 @@ public class RegisterActivity extends AppCompatActivity {
         finish();
     }
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         auth = FirebaseAuth.getInstance();
 
@@ -61,7 +66,7 @@ public class RegisterActivity extends AppCompatActivity {
         password = findViewById(R.id.password_new);
         confirm_password = findViewById(R.id.password_confirm);
         submit = findViewById(R.id.sign_up_btn);
-        loading = findViewById(R.id.login_progressbar);
+        loading = findViewById(R.id.register_progressbar);
 
         loading.setVisibility(View.GONE);
 

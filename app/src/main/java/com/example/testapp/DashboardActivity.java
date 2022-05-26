@@ -2,6 +2,7 @@ package com.example.testapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -16,6 +17,7 @@ public class DashboardActivity extends AppCompatActivity {
     FlagFragment flag = new FlagFragment();
     GroupFragment group = new GroupFragment();
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

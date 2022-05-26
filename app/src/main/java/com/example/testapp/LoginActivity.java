@@ -88,10 +88,12 @@ public class LoginActivity extends AppCompatActivity {
             loading.setVisibility(View.VISIBLE);
             if (TextUtils.isEmpty(email.getText().toString().trim())) {
                 email.setError("Email is required.");
+                loading.setVisibility(View.GONE);
             } else if (TextUtils.isEmpty(password.getText().toString().trim())) {
                 password.setError("Password is required.");
+                loading.setVisibility(View.GONE);
             } else if (email.getText().toString().trim().equals("admin") && password.getText().toString().trim().equals("admin")) {
-
+                loading.setVisibility(View.GONE);
                 dialogBuilder = new AlertDialog.Builder(this);
                 final View passwordPermissionView = getLayoutInflater().inflate(R.layout.popup_number, null);
 
@@ -99,10 +101,10 @@ public class LoginActivity extends AppCompatActivity {
                 EditText userInput;
                 Button submit;
 
-                title = (TextView) passwordPermissionView.findViewById(R.id.popup_number_title);
-                userInput = (EditText) passwordPermissionView.findViewById(R.id.popup_number_input);
-                submit = (Button) passwordPermissionView.findViewById(R.id.popup_number_submit_btn);
-                cancel = (TextView) passwordPermissionView.findViewById(R.id.popup_number_cancel_btn);
+                title = passwordPermissionView.findViewById(R.id.popup_number_title);
+                userInput = passwordPermissionView.findViewById(R.id.popup_number_input);
+                submit = passwordPermissionView.findViewById(R.id.popup_number_submit_btn);
+                cancel = passwordPermissionView.findViewById(R.id.popup_number_cancel_btn);
 
                 title.setText(R.string.Number_code_title);
                 userInput.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
@@ -136,7 +138,8 @@ public class LoginActivity extends AppCompatActivity {
                                 finish();
                             }
                         }).addOnFailureListener(e -> {
-                            Toast.makeText(LoginActivity.this,"LOGIN FAILED, " + e.getMessage(),Toast.LENGTH_LONG).show();
+                            loading.setVisibility(View.GONE);
+                            Toast.makeText(LoginActivity.this, e.getMessage(),Toast.LENGTH_LONG).show();
                             Log.d("LoginActivity" ,"onFailure: " + e.getMessage());
                         });
             } else {
@@ -160,19 +163,24 @@ public class LoginActivity extends AppCompatActivity {
                                                             }
                                                         }
                                                     }).addOnFailureListener(e -> {
+                                                        loading.setVisibility(View.GONE);
                                                         Toast.makeText(LoginActivity.this,"LOGIN FAILED, " + e.getMessage(),Toast.LENGTH_LONG).show();
                                                         Log.d("LoginActivity" ,"onFailure: " + e.getMessage());
                                                     });
-                                            break;
                                         }
+                                        break;
+                                    } else {
+                                        loading.setVisibility(View.GONE);
                                     }
                                 }
                             }
                         }
                     } else {
+                        loading.setVisibility(View.GONE);
                         Exception e = task.getException();
                         if (e != null) {
                             Log.e("LoginActivity",e.getMessage());
+                            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -192,10 +200,10 @@ public class LoginActivity extends AppCompatActivity {
             EditText userInput;
             Button submit;
 
-            title = (TextView) EmailRequestView.findViewById(R.id.popup_email_title);
-            userInput = (EditText) EmailRequestView.findViewById(R.id.popup_email_input);
-            submit = (Button) EmailRequestView.findViewById(R.id.popup_email_submit_btn);
-            cancel = (TextView) EmailRequestView.findViewById(R.id.popup_email_cancel_btn);
+            title = EmailRequestView.findViewById(R.id.popup_email_title);
+            userInput = EmailRequestView.findViewById(R.id.popup_email_input);
+            submit = EmailRequestView.findViewById(R.id.popup_email_submit_btn);
+            cancel = EmailRequestView.findViewById(R.id.popup_email_cancel_btn);
 
             title.setText(R.string.Email_Popup_title);
 

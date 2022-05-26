@@ -4,7 +4,7 @@
     //Login activity
 
     <string name="sign_in">SIGN IN</string>
-    <string name="hint_email">EMAIL/USERNAME</string>
+    <string name="hint_email">EMAIL</string>
     <string name="hint_password">PASSWORD</string>
     <string name="forgot_btn">Forgot Password?</string>
     <string name="create_btn">Sign Up?</string>
