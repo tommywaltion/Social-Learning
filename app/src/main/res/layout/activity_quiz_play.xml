@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".QuizPlayActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="8">
+
+        <TextView
+            android:id="@+id/quiz_play_question_number"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2.4"
+            android:text="1"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/quiz_play_questions"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.6"
+            android:maxLength="301"
+            android:text="test Question, Question about testing how many character i should put here, this is only testing purposes do not worry on how long it is, sadly this is still a possible length to read in your phone,yet then this, then it is not possible, good luck whoever reading this, because this is not a question?"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:autoSizeMaxTextSize="50sp"
+            app:autoSizeMinTextSize="25sp"
+            app:autoSizeTextType="uniform" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.6"
+            android:orientation="vertical"
+            android:weightSum="4">
+
+            <TextView
+                android:id="@+id/quiz_play_answer_1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/layout_bg_round_edge"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:text="First answer A"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="50sp"
+                app:autoSizeMaxTextSize="50sp"
+                app:autoSizeMinTextSize="25sp"
+                app:autoSizeTextType="uniform" />
+
+            <TextView
+                android:id="@+id/quiz_play_answer_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/layout_bg_round_edge"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:text="Second answer B"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="50sp"
+                app:autoSizeMaxTextSize="50sp"
+                app:autoSizeMinTextSize="25sp"
+                app:autoSizeTextType="uniform" />
+
+            <TextView
+                android:id="@+id/quiz_play_answer_3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/layout_bg_round_edge"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:text="Third answer C"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="50sp"
+                app:autoSizeMaxTextSize="50sp"
+                app:autoSizeMinTextSize="25sp"
+                app:autoSizeTextType="uniform" />
+
+            <TextView
+                android:id="@+id/quiz_play_answer_4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_weight="1.05"
+                android:background="@drawable/layout_bg_round_edge"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:text="Forth answer D"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="50sp"
+                app:autoSizeMaxTextSize="50sp"
+                app:autoSizeMinTextSize="25sp"
+                app:autoSizeTextType="uniform" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2.4">
+
+            <TextView
+                android:id="@+id/quiz_play_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text="BACK"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:drawableStartCompat="@drawable/ic_baseline_keyboard_arrow_left_24" />
+
+            <TextView
+                android:id="@+id/quiz_play_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:text="NEXT"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:drawableEndCompat="@drawable/ic_baseline_keyboard_arrow_right_24" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

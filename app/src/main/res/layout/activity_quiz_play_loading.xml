@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".QuizPlayLoadingActivity">
+
+    <RelativeLayout
+        android:id="@+id/display_quiz_play"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/purple_200"
+        android:elevation="5dp">
+
+        <TextView
+            android:id="@+id/quiz_play_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="150dp"
+            android:text="WELCOME TO QUIZ"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/quiz_play_player_tag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/quiz_play_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:text="Player"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/quiz_play_player_name"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/layout_bg_round_edge"
+            android:maxLength="20"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:autoSizeMaxTextSize="50sp"
+            app:autoSizeMinTextSize="20sp"
+            app:autoSizeTextType="uniform" />
+
+        <ProgressBar
+            android:id="@+id/quiz_play_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="60dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/quiz_play_ready_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="150dp"
+            android:alpha="0"
+            android:text="Ready ?"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/quiz_play_ready_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="75dp"
+            android:layout_marginBottom="50dp"
+            android:alpha="0"
+            android:background="@drawable/layout_bg_round_edge"
+            android:paddingStart="15dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="5dp"
+            android:text="NO"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/quiz_play_ready_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="75dp"
+            android:layout_marginBottom="50dp"
+            android:alpha="0"
+            android:background="@drawable/layout_bg_round_edge"
+            android:padding="5dp"
+            android:text="YES"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            android:visibility="invisible" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

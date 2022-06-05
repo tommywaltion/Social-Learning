@@ -43,9 +43,9 @@ public class LoginActivity extends AppCompatActivity {
         TextView email = findViewById(R.id.email);
         login_btn.setEnabled(email.getText().toString().trim().length() != 0);
         if (currentUser != null) {
-            //startActivity(new Intent(getApplicationContext(),DashboardActivity.class));
+            startActivity(new Intent(getApplicationContext(),DashboardActivity.class));
             Log.d("LoginActivity" ,"onSuccess: user Profile is created for " + currentUser.getUid());
-            //finish();
+            finish();
         }
     }
 

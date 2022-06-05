@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/home_btn"
-        android:title="Home"
+    <item
+        android:orderInCategory="0"
+        android:title="@string/Home_Page"
         android:icon="@drawable/ic_baseline_home"
         />
-    <item android:id="@+id/flag_btn"
-        android:title="Flag"
+    <item
+        android:orderInCategory="1"
+        android:title="@string/Quiz_Page"
         android:icon="@drawable/ic_baseline_outlined_flag"
         />
-    <item android:id="@+id/group_btn"
-        android:title="Group"
+    <item
+        android:orderInCategory="2"
+        android:title="@string/Group_Page"
         android:icon="@drawable/ic_baseline_group"
         />
 

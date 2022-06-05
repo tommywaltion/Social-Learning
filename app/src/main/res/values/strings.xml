@@ -16,9 +16,9 @@
     <string name="user_nis">NIS</string>
     <string name="hint_password_confirmation">CONFIRM PASSWORD</string>
     <string name="already_btn">Sign In?</string>
-    
+
     //Popup email forget password
-    
+
     <string name="Email_Popup_hint">Email</string>
     <string name="Email_Popup_title">Enter your email to get your reset password link</string>
 
@@ -42,5 +42,19 @@
     <string name="Cancel_button">X</string>
     <string name="Empty_String_Test">EMPTY STRING</string>
     <string name="Number_code_title">Input Code:</string>
+
+    //bottom navigation bar
+
+    <string name="Home_Page">Home</string>
+    <string name="Quiz_Page">Quiz</string>
+    <string name="Group_Page">Group</string>
+
+    //quiz
+
+    <string name="Quiz_Finish_Question">UPLOAD</string>
+    <string name="Quiz_Next_Question">NEXT</string>
+    <string name="Quiz_Final_Question">FINISH</string>
+    <string name="Quiz_Submit_Answer">SUBMIT</string>
+    <string name="Quiz_Nickname_Title">NICKNAME</string>
 
 </resources>

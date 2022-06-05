@@ -13,6 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Testapp">
         <activity
+            android:name=".QuizResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QuizPlayLoadingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QuizPlayActivity"
+            android:exported="false" />
+        <activity
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity

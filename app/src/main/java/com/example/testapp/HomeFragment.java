@@ -21,12 +21,13 @@ public class HomeFragment extends Fragment {
 
     ArrayList<PostModel> postModelArrayList = new ArrayList<>();
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_home,container, false);
 
-        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         populateRecyclerView();
 

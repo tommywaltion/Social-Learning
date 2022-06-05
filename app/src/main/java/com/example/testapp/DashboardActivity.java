@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -33,14 +35,14 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     private boolean onNavigationItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.home_btn:
+        switch (item.getOrder()) {
+            case 0:
                 getSupportFragmentManager().beginTransaction().replace(R.id.main_container, home).commit();
                 return true;
-            case R.id.flag_btn:
+            case 1:
                 getSupportFragmentManager().beginTransaction().replace(R.id.main_container, flag).commit();
                 return true;
-            case R.id.group_btn:
+            case 2:
                 getSupportFragmentManager().beginTransaction().replace(R.id.main_container, group).commit();
                 return true;
         }
