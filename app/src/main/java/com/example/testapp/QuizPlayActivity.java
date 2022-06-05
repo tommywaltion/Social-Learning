@@ -69,7 +69,7 @@ public class QuizPlayActivity extends AppCompatActivity {
                 if (mCurrentPosition <= mQuestionList.size()) {
                     if (mCurrentPosition <= playerData.getAnswer().size()) {
                         correctAnswers = setQuestion();
-                        mSelectedOptionPosition = playerData.getAnswer().get(mCurrentPosition - 1);
+                        mSelectedOptionPosition = (int) playerData.getAnswer().get(mCurrentPosition - 1);
                         if (correctAnswers != mSelectedOptionPosition) {
                             answerView(mSelectedOptionPosition, R.drawable.quiz_wrong_option_border_bg);
                         }
@@ -121,7 +121,7 @@ public class QuizPlayActivity extends AppCompatActivity {
                 answered = true;
                 mCurrentPosition--;
                 correctAnswers = setQuestion();
-                mSelectedOptionPosition = playerData.getAnswer().get(mCurrentPosition - 1);
+                mSelectedOptionPosition = (int) playerData.getAnswer().get(mCurrentPosition - 1);
                 if (correctAnswers != mSelectedOptionPosition) {
                     answerView(mSelectedOptionPosition, R.drawable.quiz_wrong_option_border_bg);
                 }

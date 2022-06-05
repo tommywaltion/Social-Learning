@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -46,60 +47,60 @@ public class FlagFragment extends Fragment {
         FirebaseUser currentUser = auth.getCurrentUser();
 
         TextView AnimTest = view.findViewById(R.id.testButton);
-        AnimTest.setOnClickListener(v -> {
-            dialogBuilder = new AlertDialog.Builder(view.getContext());
-            final View passwordPermissionView = getLayoutInflater().inflate(R.layout.popup_number, null);
+        AnimTest.setOnClickListener(v -> quizDatabase.document(quizId).get().addOnSuccessListener(documentSnapshot -> {
+            Map<String, Object> quizData = documentSnapshot.getData();
+            if (quizData != null) {
+                Map<String,Object> players = (Map<String, Object>) quizData.get("participant");
+                if (currentUser != null) {
+                    assert players != null;
+                    if (players.get(currentUser.getUid()) == null) {
+                        dialogBuilder = new AlertDialog.Builder(view.getContext());
+                        final View nicknameView = getLayoutInflater().inflate(R.layout.popup_nickname, null);
 
-            TextView cancel, title;
-            EditText userInput;
-            Button submit;
+                        TextView cancel, title;
+                        EditText userInput;
+                        Button submit;
 
-            title = passwordPermissionView.findViewById(R.id.popup_number_title);
-            userInput = passwordPermissionView.findViewById(R.id.popup_number_input);
-            submit = passwordPermissionView.findViewById(R.id.popup_number_submit_btn);
-            cancel = passwordPermissionView.findViewById(R.id.popup_number_cancel_btn);
+                        title = nicknameView.findViewById(R.id.popup_nickname_title);
+                        userInput = nicknameView.findViewById(R.id.popup_nickname_input);
+                        submit = nicknameView.findViewById(R.id.popup_nickname_submit_btn);
+                        cancel = nicknameView.findViewById(R.id.popup_nickname_cancel_btn);
 
-            title.setText(R.string.Number_code_title);
-            userInput.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
+                        title.setText(R.string.Quiz_Nickname_input);
+                        userInput.setFilters(new InputFilter[]{new InputFilter.LengthFilter(16)});
 
-            dialogBuilder.setView(passwordPermissionView);
-            dialog = dialogBuilder.create();
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            dialog.show();
+                        dialogBuilder.setView(nicknameView);
+                        dialog = dialogBuilder.create();
+                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        dialog.show();
 
-            submit.setOnClickListener(v1 -> {
-                if (userInput.getText().toString().matches("")) {
-                    userInput.setText("");
-                    userInput.setBackgroundResource(R.drawable.layout_bg_round_edge_red);
-                } else {
-                    dialog.dismiss();
-                    nickname = userInput.getText().toString();
-                }
-            });
+                        submit.setOnClickListener(v1 -> {
+                            if (userInput.getText().toString().matches("")) {
+                                userInput.setText("");
+                                userInput.setError("Nickname Required");
+                            } else {
+                                dialog.dismiss();
+                                nickname = userInput.getText().toString();
+                                QuizPlayerDataModel newItem = new QuizPlayerDataModel(
+                                        nickname,
+                                        0,
+                                        new ArrayList<>()
+                                );
+                                Intent intent = new Intent(view.getContext(), QuizPlayLoadingActivity.class);
+                                intent.putExtra("QuizId",quizId);
+                                intent.putExtra("playerData",newItem);
+                                startActivity(intent);
+                            }
+                        });
 
-            cancel.setOnClickListener(v1 -> dialog.dismiss());
-            quizDatabase.document(quizId).get().addOnSuccessListener(documentSnapshot -> {
-                Map<String, Object> quizData = documentSnapshot.getData();
-                if (quizData != null) {
-                    Map<String,Object> players = (Map<String, Object>) quizData.get("participant");
-                    if (currentUser != null) {
-                        assert players != null;
-                        if (players.get(currentUser.getUid()) == null) {
-                            QuizPlayerDataModel newItem = new QuizPlayerDataModel(
-                                    nickname,
-                                    0,
-                                    new ArrayList<>()
-                            );
-                            players.put(currentUser.getUid(),newItem);
-                            quizDatabase.document(quizId).update("participant",players);
-                        }
-                        Intent intent = new Intent(view.getContext(), QuizPlayLoadingActivity.class);
-                        intent.putExtra("QuizId",quizId);
-                        startActivity(intent);
+                        cancel.setOnClickListener(v1 -> dialog.dismiss());
+                    } else {
+                        Toast.makeText(view.getContext(), "You already submit this quiz!", Toast.LENGTH_SHORT).show();
                     }
+
                 }
-            });
-        });
+            }
+        }));
 
         return view;
     }

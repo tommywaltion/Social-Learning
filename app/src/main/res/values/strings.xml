@@ -56,5 +56,6 @@
     <string name="Quiz_Final_Question">FINISH</string>
     <string name="Quiz_Submit_Answer">SUBMIT</string>
     <string name="Quiz_Nickname_Title">NICKNAME</string>
+    <string name="Quiz_Nickname_input">Input your nickname :</string>
 
 </resources>

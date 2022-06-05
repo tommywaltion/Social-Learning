@@ -70,13 +70,9 @@ public class QuizPlayLoadingActivity extends AppCompatActivity {
 
                 Map<String,Map<String,Objects>> players = (Map<String, Map<String, Objects>>) quizData.get("participant");
                 ArrayList<Map<String,ArrayList<Objects>>> questions = (ArrayList<Map<String, ArrayList<Objects>>>) quizData.get("questions");
+                playerData = (QuizPlayerDataModel) getIntent().getParcelableExtra("playerData");
 
-                if (players != null) {
-                    Map<String,Objects> data = players.get(currentUser.getUid());
-                    assert data != null;
-                    playerData = new QuizPlayerDataModel(String.valueOf(data.get("nickname")), Integer.parseInt(String.valueOf(data.get("scores"))),new ArrayList<>());
-                    playerName = playerData.getNickname();
-                }
+                playerName = playerData.getNickname();
 
                 if (questions != null) {
                     for (int i = 0; i < questions.size(); i++) {
@@ -101,7 +97,6 @@ public class QuizPlayLoadingActivity extends AppCompatActivity {
                     Intent intent = new Intent(QuizPlayLoadingActivity.this, QuizPlayActivity.class);
                     Bundle args = new Bundle();
                     args.putSerializable("questionData",(Serializable) questionData);
-                    //args.putSerializable("playerData",(Serializable) playerData);
                     intent.putExtra("data",args);
                     intent.putExtra("playerData",playerData);
                     intent.putExtra("QuizId",quizId);

@@ -2,7 +2,6 @@ package com.example.testapp;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -63,12 +62,13 @@ public class QuizPlayerDataModel implements Parcelable{
         this.nickname = nickname;
     }
 
-    public ArrayList<Integer> getAnswer() {
+    public ArrayList getAnswer() {
         return this.answers;
     }
 
     public  void addAnswer(Integer answers) {
         this.answers.add(answers);
     }
+
 }
 
