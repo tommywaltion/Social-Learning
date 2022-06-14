@@ -34,7 +34,6 @@ public class QuizPlayLoadingActivity extends AppCompatActivity {
     private final CollectionReference quizDatabase = db.collection("quiz");
     private boolean dataFetch;
     private String playerName;
-    private FirebaseUser currentUser;
     private QuizPlayerDataModel playerData;
 
     @SuppressLint("SourceLockedOrientationActivity")
@@ -48,7 +47,7 @@ public class QuizPlayLoadingActivity extends AppCompatActivity {
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        currentUser = auth.getCurrentUser();
+        FirebaseUser currentUser = auth.getCurrentUser();
 
         final String quizId = getIntent().getStringExtra("QuizId");
 
@@ -68,8 +67,8 @@ public class QuizPlayLoadingActivity extends AppCompatActivity {
 
                 ArrayList<QuestionsModel> questionData = new ArrayList<>();
 
-                Map<String,Map<String,Objects>> players = (Map<String, Map<String, Objects>>) quizData.get("participant");
-                ArrayList<Map<String,ArrayList<Objects>>> questions = (ArrayList<Map<String, ArrayList<Objects>>>) quizData.get("questions");
+//                Map<String,Map<String,Objects>> players = (Map<String, Map<String, Objects>>) quizData.get("participant");
+                ArrayList<Map<String, ArrayList<Objects>>> questions = (ArrayList<Map<String, ArrayList<Objects>>>) quizData.get("questions");
                 playerData = (QuizPlayerDataModel) getIntent().getParcelableExtra("playerData");
 
                 playerName = playerData.getNickname();
@@ -77,39 +76,54 @@ public class QuizPlayLoadingActivity extends AppCompatActivity {
                 if (questions != null) {
                     for (int i = 0; i < questions.size(); i++) {
                         ArrayList<Objects> data = questions.get(i).get("data");
-                        assert data != null;
-                        QuestionsModel questionsModel = new QuestionsModel(
-                                Integer.parseInt(String.valueOf(data.get(0))),
-                                String.valueOf(data.get(1)),
-                                String.valueOf(data.get(2)),
-                                String.valueOf(data.get(3)),
-                                String.valueOf(data.get(4)),
-                                String.valueOf(data.get(5)),
-                                String.valueOf(data.get(6)),
-                                Integer.parseInt(String.valueOf(data.get(7))),
-                                Integer.parseInt(String.valueOf(data.get(8)))
-                        );
-                        questionData.add(questionsModel);
+                        if (data != null) {
+                            QuestionsModel questionsModel = new QuestionsModel(
+                                    Integer.parseInt(String.valueOf(data.get(0))),
+                                    Integer.parseInt(String.valueOf(data.get(1))),
+                                    String.valueOf(data.get(2)),
+                                    String.valueOf(data.get(3)),
+                                    String.valueOf(data.get(4)),
+                                    String.valueOf(data.get(5))
+                            );
+                            switch (data.size()) {
+                                case 6:
+                                    questionsModel.setOptionThree(String.valueOf(data.get(5)));
+                                case 7:
+                                    questionsModel.setOptionThree(String.valueOf(data.get(5)));
+                                    questionsModel.setOptionThree(String.valueOf(data.get(6)));
+                                case 8:
+                                    questionsModel.setOptionThree(String.valueOf(data.get(5)));
+                                    questionsModel.setOptionThree(String.valueOf(data.get(6)));
+                                    questionsModel.setOptionThree(String.valueOf(data.get(7)));
+                                case 9:
+                                    questionsModel.setOptionThree(String.valueOf(data.get(5)));
+                                    questionsModel.setOptionThree(String.valueOf(data.get(5)));
+                                    questionsModel.setOptionThree(String.valueOf(data.get(6)));
+                                    questionsModel.setOptionThree(String.valueOf(data.get(7)));
+                                    questionsModel.setOptionThree(String.valueOf(data.get(8)));
+                            }
+                            questionData.add(questionsModel);
+                        }
                     }
+
+                    readyConfirmPlate.setOnClickListener(v -> {
+                        Intent intent = new Intent(QuizPlayLoadingActivity.this, QuizPlayActivity.class);
+                        Bundle args = new Bundle();
+                        args.putSerializable("questionData", (Serializable) questionData);
+                        intent.putExtra("data", args);
+                        intent.putExtra("playerData", playerData);
+                        intent.putExtra("QuizId", quizId);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.quiz_slideup, R.anim.quiz_slideup);
+                        finishAfterTransition();
+                    });
+
+                    readyCancelPlate.setOnClickListener(v -> {
+                        overridePendingTransition(R.anim.quiz_slideup, R.anim.quiz_slideup);
+                        finishAfterTransition();
+                    });
+
                 }
-
-                readyConfirmPlate.setOnClickListener(v -> {
-                    Intent intent = new Intent(QuizPlayLoadingActivity.this, QuizPlayActivity.class);
-                    Bundle args = new Bundle();
-                    args.putSerializable("questionData",(Serializable) questionData);
-                    intent.putExtra("data",args);
-                    intent.putExtra("playerData",playerData);
-                    intent.putExtra("QuizId",quizId);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.quiz_slideup,R.anim.quiz_slideup);
-                    finishAfterTransition();
-                });
-
-                readyCancelPlate.setOnClickListener(v -> {
-                    overridePendingTransition(R.anim.quiz_slideup,R.anim.quiz_slideup);
-                    finishAfterTransition();
-                });
-
             }
         }).addOnFailureListener(e -> {
             Log.e("QuizPlayActivity", "Loading up quiz data, " + e.getMessage());

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ExamResultActivity"
+    android:id="@+id/exam_result_screen">
+
+    <ProgressBar
+        android:id="@+id/exam_result_loading"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/exam_result_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SCOREBOARD"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        android:translationY="-500dp"/>
+
+    <RelativeLayout
+        android:id="@+id/exam_result_users"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:layout_marginTop="75dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/exam_result_users_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:translationY="-2500dp">
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/exam_result_touch_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Touch anywhere to continue"
+        android:textSize="25sp"
+        android:textAlignment="center"
+        android:layout_alignParentBottom="true"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:visibility="invisible"/>
+
+</RelativeLayout>

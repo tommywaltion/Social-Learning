@@ -4,29 +4,31 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class QuestionsModel implements Parcelable {
-    private int id, correctAnswer;
+
+    private int questionScore;
+    private int correctAnswer;
     private String question;
     private String image;
     private String optionOne;
     private String optionTwo;
     private String optionThree;
     private String optionFour;
-    private int questionScore;
+    private String optionFive;
 
-    protected QuestionsModel(int id, String question, String image, String optionOne, String optionTwo, String optionThree, String optionFour, int correctAnswer, int questionScore) {
-        this.id = id;
-        this.image = image;
+    protected QuestionsModel(int questionScore, int correctAnswer, String question, String image, String optionOne, String optionTwo, String... data) {
+        this.questionScore = questionScore;
+        this.correctAnswer = correctAnswer;
         this.question = question;
+        this.image = image;
         this.optionOne = optionOne;
         this.optionTwo = optionTwo;
-        this.optionThree = optionThree;
-        this.optionFour = optionFour;
-        this.correctAnswer = correctAnswer;
-        this.questionScore = questionScore;
+        this.optionThree = data.length > 0 ? data[0] : "";
+        this.optionFour = data.length > 1 ? data[1] : "";
+        this.optionFive = data.length > 2 ? data[2] : "";
     }
 
     protected QuestionsModel(Parcel in) {
-        id = in.readInt();
+        questionScore = in.readInt();
         correctAnswer = in.readInt();
         question = in.readString();
         image = in.readString();
@@ -34,7 +36,7 @@ public class QuestionsModel implements Parcelable {
         optionTwo = in.readString();
         optionThree = in.readString();
         optionFour = in.readString();
-        questionScore = in.readInt();
+        optionFive = in.readString();
     }
 
     public static final Creator<QuestionsModel> CREATOR = new Creator<QuestionsModel>() {
@@ -48,14 +50,6 @@ public class QuestionsModel implements Parcelable {
             return new QuestionsModel[size];
         }
     };
-
-    public int getId() {
-        return this.id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getImage() {
         return this.image;
@@ -77,7 +71,7 @@ public class QuestionsModel implements Parcelable {
         return this.optionOne;
     }
 
-    public void setName(String option) {
+    public void setOptionOne(String option) {
         this.optionOne = option;
     }
 
@@ -105,6 +99,14 @@ public class QuestionsModel implements Parcelable {
         this.optionFour = option;
     }
 
+    public String getOptionFive() {
+        return this.optionFive;
+    }
+
+    public void setOptionFive(String option) {
+        this.optionFive = option;
+    }
+
     public int getCorrectAnswer() {
         return this.correctAnswer;
     }
@@ -128,7 +130,7 @@ public class QuestionsModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
+        dest.writeInt(questionScore);
         dest.writeInt(correctAnswer);
         dest.writeString(question);
         dest.writeString(image);
@@ -136,6 +138,6 @@ public class QuestionsModel implements Parcelable {
         dest.writeString(optionTwo);
         dest.writeString(optionThree);
         dest.writeString(optionFour);
-        dest.writeInt(questionScore);
+        dest.writeString(optionFive);
     }
 }

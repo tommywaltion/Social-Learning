@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ExamStartActivity"
+    android:id="@+id/exam_start_screen"
+    android:clipChildren="false">
+
+    <LinearLayout
+        android:id="@+id/exam_start_question_list"
+        android:layout_width="380dp"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="20dp"
+        android:translationX="-380dp"
+        android:background="@color/white"
+        android:elevation="2dp"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/exam_start_hide_position"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/layout_bg_round_edge_green"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:src="@drawable/ic_baseline_arrow_back_24"
+                tools:ignore="ContentDescription" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="9.25">
+
+            <GridLayout
+                android:id="@+id/exam_start_question_list_grid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="5"
+                tools:ignore="UselessParent">
+
+<!--                <TextView-->
+<!--                    android:layout_columnWeight="1"-->
+<!--                    android:layout_rowWeight="1"-->
+<!--                    android:text="1"-->
+<!--                    android:textSize="50sp"-->
+<!--                    android:textAlignment="center" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_columnWeight="1"-->
+<!--                    android:layout_rowWeight="1"-->
+<!--                    android:text="2"-->
+<!--                    android:textSize="50sp"-->
+<!--                    android:textAlignment="center" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_columnWeight="1"-->
+<!--                    android:layout_rowWeight="1"-->
+<!--                    android:text="3"-->
+<!--                    android:textSize="50sp"-->
+<!--                    android:textAlignment="center" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_columnWeight="1"-->
+<!--                    android:layout_rowWeight="1"-->
+<!--                    android:text="4"-->
+<!--                    android:textSize="50sp"-->
+<!--                    android:textAlignment="center" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_columnWeight="1"-->
+<!--                    android:layout_rowWeight="1"-->
+<!--                    android:text="5"-->
+<!--                    android:textSize="50sp"-->
+<!--                    android:textAlignment="center" />-->
+
+            </GridLayout>
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:elevation="1dp"
+        android:weightSum="25">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25">
+
+            <ImageView
+                android:id="@+id/exam_start_show_position"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/layout_bg_round_edge_green"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:src="@drawable/ic_baseline_arrow_forward_24"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/exam_start_position_number"
+                android:layout_width="90dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toEndOf="@id/exam_start_show_position"
+                android:background="@drawable/layout_bg_round_edge_blue"
+                android:padding="5dp"
+                android:text=""
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                app:autoSizeMaxTextSize="25sp"
+                app:autoSizeTextType="uniform" />
+
+            <TextView
+                android:id="@+id/exam_start_timers"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/layout_bg_round_edge"
+                android:text=""
+                android:textAlignment="center"
+                android:textSize="25sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="24.5">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:ignore="UselessParent">
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/exam_start_questions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/Empty_String_Test"
+                        android:textColor="@color/black"
+                        android:textSize="25sp" />
+
+                    <ImageView
+                        android:id="@+id/exam_start_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:visibility="gone"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/exam_start_answer_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="30sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/exam_start_answer_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="30sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/exam_start_answer_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="30sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/exam_start_answer_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="30sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/exam_start_answer_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="30sp"
+                        android:visibility="gone" />
+
+                </TableLayout>
+
+            </ScrollView>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/exam_start_selection_answer1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:text="@string/Answer_1"
+                android:textSize="40sp"
+                android:textAlignment="center"
+                android:background="@drawable/layout_bg_round_edge"/>
+
+            <TextView
+                android:id="@+id/exam_start_selection_answer2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:text="@string/Answer_2"
+                android:textSize="40sp"
+                android:textAlignment="center"
+                android:background="@drawable/layout_bg_round_edge"/>
+
+            <TextView
+                android:id="@+id/exam_start_selection_answer3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:text="@string/Answer_3"
+                android:textSize="40sp"
+                android:textAlignment="center"
+                android:background="@drawable/layout_bg_round_edge"/>
+
+            <TextView
+                android:id="@+id/exam_start_selection_answer4"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:text="@string/Answer_4"
+                android:textSize="40sp"
+                android:textAlignment="center"
+                android:background="@drawable/layout_bg_round_edge"/>
+
+            <TextView
+                android:id="@+id/exam_start_selection_answer5"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:text="@string/Answer_5"
+                android:textSize="40sp"
+                android:textAlignment="center"
+                android:background="@drawable/layout_bg_round_edge"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:layout_weight="0.25"
+            android:layout_gravity="bottom">
+
+            <TextView
+                android:id="@+id/exam_start_previous"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Prev_Question"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:drawableStartCompat="@drawable/ic_baseline_arrow_back_24" />
+
+            <TextView
+                android:id="@+id/exam_start_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/Final_Question"
+                android:textSize="20sp"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/exam_start_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="@string/Next_Question"
+                app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_24"
+                android:textSize="20sp"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                tools:ignore="RelativeOverlap" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

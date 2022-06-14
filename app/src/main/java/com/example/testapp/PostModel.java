@@ -2,10 +2,10 @@ package com.example.testapp;
 
 public class PostModel {
 
-    int id, likes, creator_profile, post_image;
-    String name, time, title;
+    int id, likes, post_image;
+    String name, time, title, creator_profile;
 
-    public PostModel(int id, int likes, int creator_profile, int post_image, String name, String time, String title ) {
+    public PostModel(int id, int likes, String creator_profile, int post_image, String name, String time, String title ) {
         this.id = id;
         this.likes = likes;
         this.creator_profile = creator_profile;
@@ -31,11 +31,11 @@ public class PostModel {
         this.likes = likes;
     }
 
-    public int getCreator_profile() {
+    public String getCreator_profile() {
         return this.creator_profile;
     }
 
-    public void setCreator_profile(int creator_profile) {
+    public void setCreator_profile(String creator_profile) {
         this.creator_profile = creator_profile;
     }
 

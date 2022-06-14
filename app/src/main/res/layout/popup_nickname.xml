@@ -52,7 +52,7 @@
             android:layout_marginBottom="10dp"
             android:autofillHints="username"
             android:background="@color/light_gray"
-            android:hint="@string/Quiz_Nickname_Title"
+            android:hint="@string/Nickname_Title"
             android:inputType="text"
             android:padding="10dp"
             android:textAlignment="center"

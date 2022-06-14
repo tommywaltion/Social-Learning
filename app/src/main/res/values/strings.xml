@@ -49,13 +49,24 @@
     <string name="Quiz_Page">Quiz</string>
     <string name="Group_Page">Group</string>
 
-    //quiz
+    //quiz and Exam
 
-    <string name="Quiz_Finish_Question">UPLOAD</string>
-    <string name="Quiz_Next_Question">NEXT</string>
-    <string name="Quiz_Final_Question">FINISH</string>
-    <string name="Quiz_Submit_Answer">SUBMIT</string>
-    <string name="Quiz_Nickname_Title">NICKNAME</string>
-    <string name="Quiz_Nickname_input">Input your nickname :</string>
+
+    <string name="Finish_Question">UPLOAD</string>
+    <string name="Prev_Question">BACK</string>
+    <string name="Next_Question">NEXT</string>
+    <string name="Final_Question">FINISH</string>
+    <string name="Submit_Answer">SUBMIT</string>
+    <string name="Nickname_Title">NICKNAME</string>
+    <string name="Nickname_input">Input your nickname :</string>
+    <string name="loading_title">User</string>
+    <string name="Confirm_title">Ready ?</string>
+    <string name="Confirm_yes">YES</string>
+    <string name="Confirm_no">NO</string>
+    <string name="Answer_1">A</string>
+    <string name="Answer_2">B</string>
+    <string name="Answer_3">C</string>
+    <string name="Answer_4">D</string>
+    <string name="Answer_5">E</string>
 
 </resources>

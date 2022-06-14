@@ -53,7 +53,7 @@ public class QuizPlayActivity extends AppCompatActivity {
 
         Bundle args = getIntent().getBundleExtra("data");
         mQuestionList = (ArrayList<QuestionsModel>) args.getSerializable("questionData");
-        playerData = (QuizPlayerDataModel) getIntent().getParcelableExtra("playerData");
+        playerData = getIntent().getParcelableExtra("playerData");
         final String quizId = getIntent().getStringExtra("QuizId");
 
         correctAnswers = setQuestion();
@@ -77,9 +77,9 @@ public class QuizPlayActivity extends AppCompatActivity {
                         answerView(correctAnswers, R.drawable.quiz_correct_option_border_bg);
 
                         if (mCurrentPosition == mQuestionList.size()) {
-                            submit.setText(R.string.Quiz_Finish_Question);
+                            submit.setText(R.string.Finish_Question);
                         } else {
-                            submit.setText(R.string.Quiz_Next_Question);
+                            submit.setText(R.string.Next_Question);
                         }
                     } else {
                         correctAnswers = setQuestion();
@@ -92,9 +92,9 @@ public class QuizPlayActivity extends AppCompatActivity {
                     Intent intent = new Intent(QuizPlayActivity.this,QuizResultActivity.class);
                     intent.putExtra("playerData",playerData);
                     intent.putExtra("QuizId",quizId);
-                    startActivity(intent);
                     overridePendingTransition(R.anim.quiz_slideup,R.anim.quiz_slideup);
                     finishAfterTransition();
+                    startActivity(intent);
                 }
             } else {
                 if (correctAnswers != mSelectedOptionPosition) {
@@ -106,9 +106,9 @@ public class QuizPlayActivity extends AppCompatActivity {
                 answerView(correctAnswers, R.drawable.quiz_correct_option_border_bg);
 
                 if (mCurrentPosition == mQuestionList.size()) {
-                    submit.setText(R.string.Quiz_Finish_Question);
+                    submit.setText(R.string.Finish_Question);
                 } else {
-                    submit.setText(R.string.Quiz_Next_Question);
+                    submit.setText(R.string.Next_Question);
                 }
                 playerData.addAnswer(mSelectedOptionPosition);
                 mSelectedOptionPosition = 0;
@@ -129,9 +129,9 @@ public class QuizPlayActivity extends AppCompatActivity {
                 answerView(correctAnswers, R.drawable.quiz_correct_option_border_bg);
 
                 if (mCurrentPosition == mQuestionList.size()) {
-                    submit.setText(R.string.Quiz_Finish_Question);
+                    submit.setText(R.string.Finish_Question);
                 } else {
-                    submit.setText(R.string.Quiz_Next_Question);
+                    submit.setText(R.string.Next_Question);
                 }
             } else {
                 Log.e("QuizPlayActivity","Player trying to exit quiz");
@@ -143,14 +143,12 @@ public class QuizPlayActivity extends AppCompatActivity {
     private int setQuestion() {
         QuestionsModel question = mQuestionList.get(mCurrentPosition - 1);
 
-
-
         defaultOptionView();
 
         if (mCurrentPosition == mQuestionList.size()) {
-            submit.setText(R.string.Quiz_Final_Question);
+            submit.setText(R.string.Final_Question);
         } else {
-            submit.setText(R.string.Quiz_Submit_Answer);
+            submit.setText(R.string.Submit_Answer);
         }
 
         questionNumber.setText(String.valueOf(mCurrentPosition));

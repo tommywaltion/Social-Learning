@@ -51,16 +51,16 @@ public class HomeFragment extends Fragment {
     @SuppressLint("NotifyDataSetChanged")
     public void populateRecyclerView() {
 
-        PostModel postModel = new PostModel(1, 5, R.drawable.pfp_2, 0, "Tommy Waltion", "2 Hrs", "Yeetus Deletus!");
+        PostModel postModel = new PostModel(1, 5, "", 0, "Tommy Waltion", "2 Hrs", "Yeetus Deletus!");
         postModelArrayList.add(postModel);
 
-        postModel = new PostModel(2, 15, R.drawable.pfp_1, R.drawable.background, "Tommy Waltion", "2 Hrs", "Yeetus Deletus!");
+        postModel = new PostModel(2, 15, "", R.drawable.background, "Tommy Waltion", "2 Hrs", "Yeetus Deletus!");
         postModelArrayList.add(postModel);
-        postModel = new PostModel(3, 25, R.drawable.pfp_2, 0, "Tommy Waltion", "2 Hrs", "Yeetus Deletus!");
+        postModel = new PostModel(3, 25, "", 0, "Tommy Waltion", "2 Hrs", "Yeetus Deletus!");
         postModelArrayList.add(postModel);
-        postModel = new PostModel(4, 69, R.drawable.pfp_1, R.drawable.background, "Tommy Waltion", "2 Hrs", "Yeetus Deletus!");
+        postModel = new PostModel(4, 69, "", R.drawable.background, "Tommy Waltion", "2 Hrs", "Yeetus Deletus!");
         postModelArrayList.add(postModel);
-        postModel = new PostModel(5, 99, R.drawable.pfp_2, 0, "Tommy Waltion", "2 Hrs", "Yeetus Deletus!");
+        postModel = new PostModel(5, 99, "https://firebasestorage.googleapis.com/v0/b/testapp-377b8.appspot.com/o/goodbye.png?alt=media&token=17fcac35-ec95-4520-8662-614bbf2cfca7", 0, "Tommy Waltion", "2 Hrs", "Yeetus Deletus!");
         postModelArrayList.add(postModel);
         //adapterPost.notifyDataSetChanged();
     }

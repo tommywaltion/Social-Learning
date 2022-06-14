@@ -14,4 +14,6 @@
     <color name="cyan">#43c5ca</color>
     <color name="red">#da492e</color>
     <color name="green">#00CC00</color>
+    <color name="blue">#0000FF</color>
+    <color name="yellow">#CCCC00</color>
 </resources>

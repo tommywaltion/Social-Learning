@@ -127,7 +127,7 @@ public class RegisterActivity extends AppCompatActivity {
                             user.put("username",username.getText().toString());
                             user.put("NIS",nis.getText().toString());
                             user.put("email",email.getText().toString());
-                            db.collection("users").add(user).addOnSuccessListener(command -> Log.d("RegisterActivity" ,"onSuccess: user Profile is created for " + UserId));
+                            db.collection("users").document(UserId).set(user);
                             startActivity(new Intent(getApplicationContext(),DashboardActivity.class));
                             finish();
                         }

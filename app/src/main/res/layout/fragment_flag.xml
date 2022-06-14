@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".FlagFragment">
 
     <TextView
@@ -15,4 +16,13 @@
         android:padding="20dp"
         android:background="@drawable/layout_bg_round_edge"/>
 
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/layout_bg_round_edge"
+        android:src="@drawable/ic_baseline_add_24"
+        app:tint="@color/gray"
+        android:padding="2dp"
+        android:textSize="50sp" />
 </RelativeLayout>
