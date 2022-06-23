@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -127,7 +128,7 @@ public class RegisterActivity extends AppCompatActivity {
                             user.put("username",username.getText().toString());
                             user.put("NIS",nis.getText().toString());
                             user.put("email",email.getText().toString());
-                            db.collection("users").document(UserId).set(user);
+                            db.collection("users").document(UserId).set(user, SetOptions.merge());
                             startActivity(new Intent(getApplicationContext(),DashboardActivity.class));
                             finish();
                         }

@@ -61,28 +61,28 @@ public class ExamStartLoadingActivity extends AppCompatActivity {
                 dataFetch = true;
                 loading.setVisibility(View.GONE);
 
-                ArrayList<Map<String,ArrayList<Objects>>> questions = (ArrayList<Map<String, ArrayList<Objects>>>) examData.get("questions");
+                ArrayList<Map<String,QuestionsModel>> questions = (ArrayList<Map<String, QuestionsModel>>) examData.get("questions");
                 HashMap<String,Boolean> settings = (HashMap<String, Boolean>) examData.get("settings");
                 userName = getIntent().getStringExtra("userNickname");
 
                 if (questions != null) {
                     for (int i = 0; i < questions.size(); i++) {
-                        ArrayList<Objects> data = questions.get(i).get("data");
+                        Map<String, Objects> data = (Map<String, Objects>) questions.get(i).get("data");
                         if (data != null) {
                             QuestionsModel questionsModel = new QuestionsModel(
-                                    Integer.parseInt(String.valueOf(data.get(0))),
-                                    Integer.parseInt(String.valueOf(data.get(1))),
-                                    String.valueOf(data.get(2)),
-                                    String.valueOf(data.get(3)),
-                                    String.valueOf(data.get(4)),
-                                    String.valueOf(data.get(5))
+                                    Integer.parseInt(String.valueOf(data.get("questionScore"))),
+                                    Integer.parseInt(String.valueOf(data.get("correctAnswer"))),
+                                    String.valueOf(data.get("question")),
+                                    String.valueOf(data.get("image")),
+                                    String.valueOf(data.get("optionOne")),
+                                    String.valueOf(data.get("optionTwo"))
                             );
                             if (data.size() >= 7) {
-                                questionsModel.setOptionThree(String.valueOf(data.get(6)));
+                                questionsModel.setOptionThree(String.valueOf(data.get("optionThree")));
                             }if (data.size() >= 8) {
-                                questionsModel.setOptionFour(String.valueOf(data.get(7)));
+                                questionsModel.setOptionFour(String.valueOf(data.get("optionFour")));
                             } if (data.size() == 9) {
-                                questionsModel.setOptionFive(String.valueOf(data.get(8)));
+                                questionsModel.setOptionFive(String.valueOf(data.get("optionFive")));
                             }
                             questionData.add(questionsModel);
                         }

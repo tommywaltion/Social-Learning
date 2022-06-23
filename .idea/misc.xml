@@ -12,11 +12,15 @@
         <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/drawable/exam_selected_option_border.xml" value="0.124" />
         <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/drawable/exam_wrong_option_border.xml" value="0.124" />
         <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.244" />
+        <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/drawable/image_circle.xml" value="0.232" />
         <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/drawable/layout_bg_round_black_edge.xml" value="0.166" />
         <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/drawable/layout_bg_round_edge.xml" value="0.1305" />
         <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/drawable/layout_bg_round_edge_blue.xml" value="0.232" />
         <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/drawable/layout_bg_round_edge_green.xml" value="0.232" />
+        <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/drawable/layout_bg_round_edge_orange.xml" value="0.232" />
         <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/drawable/layout_bg_round_edge_outline.xml" value="0.232" />
+        <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/drawable/layout_bg_round_edge_red.xml" value="0.232" />
+        <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/drawable/profile_round_image.xml" value="0.232" />
         <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/drawable/quiz_correct_option_border_bg.xml" value="0.1175" />
         <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/drawable/quiz_default_option_border_bg.xml" value="0.1175" />
         <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/drawable/quiz_selected_border_bg.xml" value="0.1175" />
@@ -25,6 +29,7 @@
         <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/layout-v26/activity_quiz_play.xml" value="0.25416666666666665" />
         <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/layout/AdapterPost.xml" value="0.11302083333333333" />
         <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/layout/activity_dashboard.xml" value="0.25416666666666665" />
+        <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/layout/activity_exam_create.xml" value="0.14114583333333333" />
         <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/layout/activity_exam_result.xml" value="0.19114583333333332" />
         <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/layout/activity_exam_start.xml" value="0.23333333333333334" />
         <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/layout/activity_exam_start_loading.xml" value="0.11354166666666667" />
@@ -36,9 +41,11 @@
         <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/layout/activity_register.xml" value="0.16354166666666667" />
         <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/layout/adapter_post.xml" value="0.1" />
         <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/layout/adapterposting.xml" value="0.11302083333333333" />
+        <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/layout/exam_create_question_tempalte.xml" value="0.25416666666666665" />
+        <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/layout/exam_create_question_template.xml" value="0.25416666666666665" />
         <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/layout/exam_result_scoreplate.xml" value="0.11510416666666666" />
         <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/layout/fragment_adapter_posting.xml" value="0.11302083333333333" />
-        <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/layout/fragment_flag.xml" value="0.536" />
+        <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/layout/fragment_flag.xml" value="0.25416666666666665" />
         <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/layout/fragment_group.xml" value="0.2" />
         <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
         <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/layout/fragment_quiz_create.xml" value="0.25416666666666665" />
@@ -50,6 +57,7 @@
         <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/layout/row_post.xml" value="0.25416666666666665" />
         <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/menu/main_nav_menu.xml" value="0.24010416666666667" />
         <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.122" />
+        <entry key="..\:/Workspace/AndroidStudio/TestApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1175" />
       </map>
     </option>
   </component>
