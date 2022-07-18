@@ -1,5 +1,7 @@
 package com.example.testapp;
 
+import android.annotation.SuppressLint;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -46,11 +48,13 @@ public class ExamResultActivity extends AppCompatActivity {
     private RelativeLayout exam_result_screen;
     private ProgressBar loading;
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     @SuppressWarnings("unchecked")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exam_result);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         setup();
         startup();

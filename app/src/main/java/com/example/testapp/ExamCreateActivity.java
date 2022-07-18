@@ -96,6 +96,7 @@ public class ExamCreateActivity extends AppCompatActivity {
         });
 
         examSubmit.setOnClickListener(v -> {
+            loading.setVisibility(View.VISIBLE);
             AlertDialog.Builder builder = new AlertDialog.Builder(ExamCreateActivity.this);
             builder.setCancelable(true);
             builder.setTitle("Are you sure ?");
@@ -105,120 +106,19 @@ public class ExamCreateActivity extends AppCompatActivity {
                 getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                         WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 ArrayList< Map< String, QuestionsModel>> questionData = new ArrayList<>();
+                Log.i("Saving Data","Starting  saving up");
                 uploadQuestion(questionList.size() - 1, questionData);
-//                boolean cancel = false;
-//                currentExamFolder = examStorageRef.child(examName);
-//                for (int i = 0; i < questionList.size(); i++) {
-//                    View question = questionList.get(i);
-//                    EditText questionText = question.findViewById(R.id.exam_create_question);
-//                    if (correctAnswerList.get(i) == 0) {
-//                        questionText.setError("No Correct Answers");
-//                        cancel = true;
-//                    }
-//                    LinearLayout answerSheet = question.findViewById(R.id.exam_create_answer_sheet_list);
-//                    EditText answer1 = question.findViewById(R.id.exam_create_answer_1_container);
-//                    EditText answer2 = question.findViewById(R.id.exam_create_answer_2_container);
-//                    EditText answer3 = question.findViewById(R.id.exam_create_answer_3_container);
-//                    EditText answer4 = question.findViewById(R.id.exam_create_answer_4_container);
-//                    EditText answer5 = question.findViewById(R.id.exam_create_answer_5_container);
-//                    if (answerSheet.getTag().equals("2")) {
-//                        if (answer1.getText().toString().matches("")) {
-//                            answer1.setError("Answer required");
-//                            cancel = true;
-//                        } if (answer2.getText().toString().matches("")) {
-//                            answer2.setError("Answer required");
-//                            cancel = true;
-//                        }
-//                    } else if (answerSheet.getTag().equals("3")) {
-//                        if (answer1.getText().toString().matches("")) {
-//                            answer1.setError("Answer required");
-//                            cancel = true;
-//                        } if (answer2.getText().toString().matches("")) {
-//                            answer2.setError("Answer required");
-//                            cancel = true;
-//                        } if (answer3.getText().toString().matches("")) {
-//                            answer3.setError("Answer required");
-//                            cancel = true;
-//                        }
-//                    } else if (answerSheet.getTag().equals("4")) {
-//                        if (answer1.getText().toString().matches("")) {
-//                            answer1.setError("Answer required");
-//                            cancel = true;
-//                        } if (answer2.getText().toString().matches("")) {
-//                            answer2.setError("Answer required");
-//                            cancel = true;
-//                        } if (answer3.getText().toString().matches("")) {
-//                            answer3.setError("Answer required");
-//                            cancel = true;
-//                        } if (answer4.getText().toString().matches("")) {
-//                            answer4.setError("Answer required");
-//                            cancel = true;
-//                        }
-//                    } else if (answerSheet.getTag().equals("5")) {
-//                        if (answer1.getText().toString().matches("")) {
-//                            answer1.setError("Answer required");
-//                            cancel = true;
-//                        } if (answer2.getText().toString().matches("")) {
-//                            answer2.setError("Answer required");
-//                            cancel = true;
-//                        } if (answer3.getText().toString().matches("")) {
-//                            answer3.setError("Answer required");
-//                            cancel = true;
-//                        } if (answer4.getText().toString().matches("")) {
-//                            answer4.setError("Answer required");
-//                            cancel = true;
-//                        } if (answer5.getText().toString().matches("")) {
-//                            answer5.setError("Answer required");
-//                            cancel = true;
-//                        }
-//                    }
-//                    EditText questionScores = question.findViewById(R.id.exam_create_question_score);
-//                    Map<String, QuestionsModel> data = new HashMap<>();
-//                    int scores;
-//                    if (questionScores.getText().toString().matches("")) {
-//                        scores = 20;
-//                    } else {
-//                        scores = Integer.parseInt(questionScores.getText().toString());
-//                    }
-//
-//                    data.put("data", new QuestionsModel(
-//                            scores,
-//                            correctAnswerList.get(i),
-//                            questionText.getText().toString(),
-//                            "",
-//                            answer1.getText().toString(),
-//                            answer2.getText().toString(),
-//                            answer3.getText().toString(),
-//                            answer4.getText().toString(),
-//                            answer5.getText().toString()
-//                    ));
-//
-//                    questionData.add(data);
-//                }
-//                if (cancel) {
-//                    Toast.makeText(this, "Missing answers", Toast.LENGTH_LONG).show();
-//                } else {
-//                    Map<String, Object> questions = new HashMap<>();
-//                    questions.put("questions", questionData);
-//                    examDatabase.add(questions).addOnCompleteListener(task -> {
-//                       if (task.isSuccessful()) {
-//                           Map<String, Map<String, Boolean>> settingsMap = new HashMap<>();
-//                           Map<String, Boolean> settings = new HashMap<>();
-//                           settings.put("revealAnswer", true);
-//                           settingsMap.put("Settings",settings);
-//                           examDatabase.document(task.getResult().getId()).set(settingsMap, SetOptions.merge());
-//                           finish();
-//                       }
-//                    });
-//                }
             });
-            builder.setNegativeButton("No", (dialog, which) -> {});
+            builder.setNegativeButton("No", (dialog, which) -> {
+                loading.setVisibility(View.GONE);
+            });
             AlertDialog dialog = builder.create();
             dialog.show();
         });
     }
 
     private void uploadQuestion(int Size, ArrayList< Map< String, QuestionsModel>> questionData) {
+        loading.setVisibility(View.VISIBLE);
         boolean cancel = false;
         View question = questionList.get(Size);
         EditText questionText = question.findViewById(R.id.exam_create_question);
@@ -284,6 +184,7 @@ public class ExamCreateActivity extends AppCompatActivity {
             }
         }
         if (cancel) {
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
             return;
         }
         EditText questionScores = question.findViewById(R.id.exam_create_question_score);
@@ -307,7 +208,7 @@ public class ExamCreateActivity extends AppCompatActivity {
                 answer5.getText().toString()
         ));
 
-        if (imageQuestionList.get(Size) != null) {
+        if (questionList.size() != 0) {
             Uri uris = imageQuestionList.get(Size); assert uris != null;
             StorageReference examImageRef = currentExamFolder.child(uris.getLastPathSegment());
             UploadTask uploadTask = examImageRef.putFile(uris);
@@ -329,6 +230,9 @@ public class ExamCreateActivity extends AppCompatActivity {
                             settings.put("revealAnswer", true);
                             settingsMap.put("settings",settings);
                             examDatabase.document(task.getResult().getId()).set(settingsMap, SetOptions.merge());
+                            Map<String, String> EXAMNAME = new HashMap<>();
+                            EXAMNAME.put("examName",examName);
+                            examDatabase.document(task.getResult().getId()).set(EXAMNAME, SetOptions.merge());
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                             finish();
                         }
