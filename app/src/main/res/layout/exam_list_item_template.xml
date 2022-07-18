@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    android:background="@drawable/layout_bg_round_edge">
+
+    <RelativeLayout
+        android:id="@+id/exam_list_template_exam_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/exam_list_template_image_logo"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/logo_img" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="25dp"
+            android:layout_toEndOf="@id/exam_list_template_image_logo">
+
+            <TextView
+                android:id="@+id/exam_list_template_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nama Soal"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                app:autoSizeMaxTextSize="25sp"
+                app:autoSizeMinTextSize="12sp"
+                app:autoSizeTextType="uniform" />
+
+            <TextView
+                android:id="@+id/exam_list_template_quantity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/exam_list_template_title"
+                android:text="40 Soal"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/exam_list_template_exam_code_placement"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/exam_list_template_exam_info">
+
+        <TextView
+            android:id="@+id/exam_list_template_exam_code_placement_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="KODE"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/exam_list_template_exam_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/exam_list_template_exam_code_placement_title"
+            android:text="69420"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/exam_list_template_author"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/exam_list_template_exam_code_placement">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/exam_list_template_author_profile_picture"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="25dp"
+            android:src="@drawable/pfp_1" />
+
+        <TextView
+            android:id="@+id/exam_list_template_author_profile_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="5dp"
+            android:layout_toStartOf="@id/exam_list_template_author_profile_picture"
+            android:text="Username author"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:autoSizeMaxTextSize="20sp"
+            app:autoSizeMinTextSize="12sp"
+            app:autoSizeTextType="uniform" />
+
+        <TextView
+            android:id="@+id/exam_list_template_timestamp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/exam_list_template_author_profile_username"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="5dp"
+            android:layout_toStartOf="@id/exam_list_template_author_profile_picture"
+            android:text="1 Month"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/exam_list_template_topic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/exam_list_template_timestamp"
+            android:layout_marginEnd="2dp"
+            android:layout_toStartOf="@id/exam_list_template_graduation"
+            android:background="@drawable/layout_bg_round_edge_blue"
+            android:padding="5dp"
+            android:text="12 IPA 3"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/exam_list_template_graduation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/exam_list_template_timestamp"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="5dp"
+            android:layout_toStartOf="@id/exam_list_template_author_profile_picture"
+            android:background="@drawable/layout_bg_round_edge_orange"
+            android:padding="5dp"
+            android:text="Angkatan 2012"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/exam_list_template_join"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/exam_list_template_author"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/layout_bg_round_edge_green"
+        android:padding="5dp"
+        android:text="JOIN"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

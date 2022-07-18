@@ -1,7 +1,9 @@
 package com.example.testapp;
 
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -16,8 +18,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Source;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,19 +33,21 @@ public class ExamStartLoadingActivity extends AppCompatActivity {
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final CollectionReference examData = db.collection("examination");
+    private FirebaseUser currentUser;
 
     private String userName;
     private boolean dataFetch;
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     @SuppressWarnings("unchecked")
     protected void onCreate(Bundle savedInstanceState) {
         overridePendingTransition(R.anim.quiz_slideup,R.anim.quiz_slideup);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exam_start_loading);
 
         final String examId = getIntent().getStringExtra("examID");
-        userName = getIntent().getStringExtra("userNickname");
 
         ArrayList<QuestionsModel> questionData = new ArrayList<>();
         final Handler handler = new Handler(Looper.getMainLooper());
@@ -55,34 +62,40 @@ public class ExamStartLoadingActivity extends AppCompatActivity {
         final TextView readyConfirmPlate = findViewById(R.id.exam_start_ready_confirm);
         final TextView readyCancelPlate = findViewById(R.id.exam_start_ready_cancel);
 
+        FirebaseAuth auth =  FirebaseAuth.getInstance();
+        currentUser = auth.getCurrentUser();
+
+        db.collection("users").document(currentUser.getUid()).get().addOnSuccessListener(command -> {
+            userName = (String) Objects.requireNonNull(command.getData()).get("username");
+        });
+
         examData.document(examId).get().addOnSuccessListener(documentSnapshot -> {
             HashMap<String,Object> examData = (HashMap<String, Object>) documentSnapshot.getData();
             if (examData != null) {
                 dataFetch = true;
                 loading.setVisibility(View.GONE);
 
-                ArrayList<Map<String,ArrayList<Objects>>> questions = (ArrayList<Map<String, ArrayList<Objects>>>) examData.get("questions");
+                ArrayList<Map<String,QuestionsModel>> questions = (ArrayList<Map<String, QuestionsModel>>) examData.get("questions");
                 HashMap<String,Boolean> settings = (HashMap<String, Boolean>) examData.get("settings");
-                userName = getIntent().getStringExtra("userNickname");
 
                 if (questions != null) {
                     for (int i = 0; i < questions.size(); i++) {
-                        ArrayList<Objects> data = questions.get(i).get("data");
+                        Map<String, Objects> data = (Map<String, Objects>) questions.get(i).get("data");
                         if (data != null) {
                             QuestionsModel questionsModel = new QuestionsModel(
-                                    Integer.parseInt(String.valueOf(data.get(0))),
-                                    Integer.parseInt(String.valueOf(data.get(1))),
-                                    String.valueOf(data.get(2)),
-                                    String.valueOf(data.get(3)),
-                                    String.valueOf(data.get(4)),
-                                    String.valueOf(data.get(5))
+                                    Integer.parseInt(String.valueOf(data.get("questionScore"))),
+                                    Integer.parseInt(String.valueOf(data.get("correctAnswer"))),
+                                    String.valueOf(data.get("question")),
+                                    String.valueOf(data.get("image")),
+                                    String.valueOf(data.get("optionOne")),
+                                    String.valueOf(data.get("optionTwo"))
                             );
                             if (data.size() >= 7) {
-                                questionsModel.setOptionThree(String.valueOf(data.get(6)));
+                                questionsModel.setOptionThree(String.valueOf(data.get("optionThree")));
                             }if (data.size() >= 8) {
-                                questionsModel.setOptionFour(String.valueOf(data.get(7)));
+                                questionsModel.setOptionFour(String.valueOf(data.get("optionFour")));
                             } if (data.size() == 9) {
-                                questionsModel.setOptionFive(String.valueOf(data.get(8)));
+                                questionsModel.setOptionFive(String.valueOf(data.get("optionFive")));
                             }
                             questionData.add(questionsModel);
                         }

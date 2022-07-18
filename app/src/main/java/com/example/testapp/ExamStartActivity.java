@@ -79,6 +79,10 @@ public class ExamStartActivity extends AppCompatActivity {
         exam_prev.setVisibility(View.GONE);
         exam_submit.setVisibility(View.GONE);
 
+        if (mQuestionList.size() == 1) {
+            exam_submit.setVisibility(View.VISIBLE);
+        }
+
         exam_selection_answer1.setOnClickListener(v -> selectedOptionView(exam_selection_answer1, exam_answer1,1));
         exam_selection_answer2.setOnClickListener(v -> selectedOptionView(exam_selection_answer2, exam_answer2,2));
         exam_selection_answer3.setOnClickListener(v -> selectedOptionView(exam_selection_answer3, exam_answer3,3));
@@ -178,6 +182,8 @@ public class ExamStartActivity extends AppCompatActivity {
                         exam_prev.setVisibility(View.VISIBLE);
                         mSelectedPos = 0;
                     }
+                } else {
+                    submitAnswer();
                 }
             } else {
                 if (mSelectedPos == 0) {

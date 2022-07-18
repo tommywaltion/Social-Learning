@@ -51,7 +51,7 @@
 
     //quiz and Exam
 
-
+    <string name="Exam_Name_Title">Exam name :</string>
     <string name="Finish_Question">UPLOAD</string>
     <string name="Prev_Question">BACK</string>
     <string name="Next_Question">NEXT</string>
@@ -68,5 +68,7 @@
     <string name="Answer_3">C</string>
     <string name="Answer_4">D</string>
     <string name="Answer_5">E</string>
+    <string name="declined">CANCEL</string>
+    <string name="accepted">SUBMIT</string>
 
 </resources>

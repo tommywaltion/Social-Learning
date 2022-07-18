@@ -3,6 +3,8 @@ package com.example.testapp;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+
 public class QuestionsModel implements Parcelable {
 
     private int questionScore;
@@ -63,24 +65,12 @@ public class QuestionsModel implements Parcelable {
         return this.question;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
-    }
-
     public String getOptionOne() {
         return this.optionOne;
     }
 
-    public void setOptionOne(String option) {
-        this.optionOne = option;
-    }
-
     public String getOptionTwo() {
         return this.optionTwo;
-    }
-
-    public void setOptionTwo(String option) {
-        this.optionTwo = option;
     }
 
     public String getOptionThree() {
@@ -111,16 +101,8 @@ public class QuestionsModel implements Parcelable {
         return this.correctAnswer;
     }
 
-    public void setCorrectAnswer(int option) {
-        this.correctAnswer = option;
-    }
-
     public int getQuestionScore() {
         return this.questionScore;
-    }
-
-    public void setQuestionScore(int score) {
-        this.questionScore = score;
     }
 
     @Override
